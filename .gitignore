@@ -34,3 +34,6 @@ build/
 ### Mac OS ###
 .DS_Store
 /.idea/
+/.mvn/wrapper/maven-wrapper.jar
+*/.git-versioned-pom.xml
+/.git-versioned-pom.xml
