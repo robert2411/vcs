@@ -37,7 +37,7 @@ jobs:
         GPG_SIGNING_KEY: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
 
     - name: Publish to Apache Maven Central
-      run: ./mvnw -Psign -Prelease deploy -s $GITHUB_WORKSPACE/settings.xml
+      run: ./mvnw -Psign -Prelease deploy
       env:
         MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
         MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
