@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
 class Git: VCS {
-    private val commitRegex = Regex("\"\\[(\\w+)]\\s+\\[((?:\\w|\\s)+)]\\s+\\[((?:\\w|\\s|-)+)]\\s+\\[((?:.*?)+)]\\s\\[((?:.*?)*)]\"")
+    private val commitRegex = Regex("\\[(\\w+)]\\s+\\[(.+)]\\s+\\[((?:\\d|\\s|-)+)]\\s+\\[((?:.*?)+)]\\s\\[((?:.*?)*)]")
     private val tagRegex = Regex("tag:\\s(.*?)(?:,|\\)|\$)")
 
     private val branchRegex = Regex("((?:\\w|\\/)+)")
@@ -51,6 +51,26 @@ class Git: VCS {
 
     override fun pull() {
         "git pull".runCommand()
+    }
+
+    override fun revertChanges() {
+        "git checkout .".runCommand()
+    }
+
+    override fun addAllFiles() {
+        "git add .".runCommand()
+    }
+
+    override fun commit(commitMessage: String) {
+        "git commit -m \"$commitMessage\"".runCommand()
+    }
+
+    override fun push(pushTags: Boolean) {
+        if (pushTags){
+            "git push --tags".runCommand()
+        } else{
+            "git push".runCommand()
+        }
     }
 
     private fun logLineToCommit(logLine: String): Commit {
